@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virt management</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Virt manager</h1>
+    <h3>Status:</h3>
+    <ul>
+      <li><strong>Hostname:</strong> <%= hostname %></li>
+    </ul>
+    <h3>VM list:</h3>
+    <hr/>
+    <ul>
+      <% domains.forEach(domain => { %>
+        <li><%= domain.name %> (<%= domain.status %>)</li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
