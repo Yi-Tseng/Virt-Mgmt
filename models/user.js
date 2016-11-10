@@ -6,15 +6,18 @@ class User {
     this.db = new sqlite3.Database('virt-mgmt')
   }
 
-  auth(username, password, cb) {
+  auth(username, password) {
     let hashedPassword = md5(password)
     let stmt = this.db.prepare('SELECT * FROM users WHERE username=? AND password=?;', username, hashedPassword)
-    stmt.get(username,
-             hashedPassword,
-             (err, res) => {
-      cb(res !== undefined)
+    return new Promise((resolve, reject) => {
+      stmt.get(username, hashedPassword, (err, res) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(res)
+        }
+      })
     })
-    stmt.finalize()
   }
 }
 
