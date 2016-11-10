@@ -7,7 +7,12 @@ let domainModel = new Domain()
 let hostModel = new Host()
 
 router.get('/', function(req, res, next) {
+  if (!req.session.username) {
+    res.redirect('/login')
+  } else {
     res.render('index', { domains: domainModel.list(), hostname: hostModel.getHostname() })
+  }
+  res.end()
 });
 
 module.exports = router;
