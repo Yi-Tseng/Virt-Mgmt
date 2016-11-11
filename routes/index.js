@@ -6,7 +6,7 @@ let Host = require('../models/host').Host
 let domainModel = new Domain()
 let hostModel = new Host()
 
-router.get('/', function(req, res, next) {
+router.get('/', async (req, res, next) {
   if (!req.session.username) {
     res.redirect('/login')
   } else {
