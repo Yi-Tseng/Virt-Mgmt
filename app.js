@@ -30,6 +30,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session(sess))
 
+app.use(async (req, res, next) => {
+  if (req.path === '/login') {
+    next()
+  } else if (!req.session.username || req.session.username === '') {
+    res.redirect('/login')
+    res.end()
+  } else {
+    next()
+  }
+})
+
 app.use('/', index)
 app.use('/login', login)
 
