@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virt management</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Clone VM</h1>
+    <a href="/">Go back</a>
+    <hr/>
+    <h3>Parameters:</h3>
+    <form method="POST" action="/clone">
+      VM name: <input name="vm_name" type="text" />
+      Clone from:
+      <select name="clone_source">
+        <% domains.forEach((domain) => { %>
+          <option><%= domain.name %></option>
+        <% }) %>
+      </select>
+      Mac address: <input name="vm_mac" type="text" value="RANDOM" />
+      <input type="submit" name="submit" value="Clone VM">
+    </form>
+  </body>
+</html>
