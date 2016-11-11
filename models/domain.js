@@ -11,6 +11,9 @@ class Domain {
                .map(e => ({'name': e, 'status': this.virsh.getDomainStatus(e)}))
   }
 
+  clone(vmName, imgSource, vmMac) {
+    return this.virsh.cloneDomain(vmName, imgSource, vmMac)
+  }
 }
 
 module.exports = {Domain: Domain}
