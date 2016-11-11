@@ -7,28 +7,29 @@ class Virsh {
 
   }
 
-  execSync(cmd) {
+  exec(cmd) {
     return childProcess.execSync(cmd).toString()
   }
 
   getHostname() {
-    let resultString = this.execSync('virsh hostname')
+    let resultString = this.exec('virsh hostname')
     return resultString.split('\n')[0]
   }
 
   listDomains() {
-    let resultString = this.execSync('virsh list --all --name')
+    let resultString = this.exec('virsh list --all --name')
     let result = resultString.split('\n').filter(s => s !== '')
     return result
   }
 
   getDomainStatus(domainName) {
-    try {
-      let resultString = this.execSync(`virsh domstate ${domainName}`)
-      return resultString.split('\n')[0]
-    } catch (err) {
-      return 'error'
-    }
+    let resultString = this.exec(`virsh domstate ${domainName}`)
+    return resultString.split('\n')[0]
+  }
+
+  cloneDomain(vmName, imgSource, vmMac) {
+    let resultString = this.exec(`virt-clone --original ${imgSource} --name ${vmName} --mac ${vmMac} --file /var/lib/libvirt/images/${vmName}.img`)
+    return resultString.split('\n')[0]
   }
 
 }
