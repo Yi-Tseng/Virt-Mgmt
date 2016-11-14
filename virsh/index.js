@@ -74,6 +74,14 @@ class Virsh {
       .map((info) => ({name: info[0], type: info[1], source: info[2], model: info[3], mac: info[4]}))
   }
 
+  getBlks(domainName) {
+    let cmd = `virsh domblklist ${domainName}`
+    let resStr = this.exec(cmd)
+    return resStr.lines.filter((e, i, a) => i >= 2)
+      .filter((l) => l !== '')
+      .map((l) => l.split(' ').filter((e) => e !== ''))
+      .map((info) => ({target: info[0], source: info[1]}))
+  }
 }
 
 module.exports = {Virsh:Virsh}
