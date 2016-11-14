@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virt management</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= vmName %></h1>
+    <a href='/'>Go back</a>
+    <hr/>
+    <h3>Informations:</h3>
+    <ul>
+      <li>ID: <%= vminfo.Id %></li>
+      <li>Name: <%= vminfo.Name %></li>
+      <li>UUID: <%= vminfo.UUID %></li>
+      <li>OS Type: <%= vminfo['OS Type'] %></li>
+      <li>State: <%= vminfo['State'] %></li>
+      <li>CPU(s): <%= vminfo['CPU(s)'] %></li>
+      <li>CPU time: <%= vminfo['CPU time'] %></li>
+      <li>Max memory: <%= vminfo['Max memory'] %></li>
+      <li>Used memory: <%= vminfo['Used memory'] %></li>
+      <li>Interfaces:
+        <ul>
+          <% interfaces.forEach((intf) => { %>
+            <li><%= intf.name %> (<strong>type:</strong> <%= intf.type %>, <strong>source:</strong> <%= intf.source%>, <strong>model:</strong> <%= intf.model%>, <strong>mac:</strong> <%= intf.mac.toUpperCase() %></li>
+          <% }) %>
+        </ul>
+      </li>
+      <li>Volumes:
+        <ul>
+          <% blks.forEach((blk) => {%>
+            <li><%= blk.target %>: <%= blk.source %></li>
+          <% }) %>
+        </ul>
+      </li>
+    </ul>
+    <hr/>
+    <h3>Actions</h3>
+    <ul>
+      <li><a href="">Start</a></li>
+      <li><a href="">Stop</a></li>
+      <li><a href="">Undefine</a></li>
+      <li><a href="">Edit</a></li>
+    </ul>
+  </body>
+</html>
