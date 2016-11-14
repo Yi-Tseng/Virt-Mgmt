@@ -1,6 +1,6 @@
-
-let childProcess = require('child_process');
-
+let childProcess = require('child_process')
+let sfl = require('string-first-line')
+let sls = require('string-lines')
 
 class Virsh {
   constructor() {
