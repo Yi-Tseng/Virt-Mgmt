@@ -64,6 +64,16 @@ class Virsh {
     return vminfo
   }
 
+  getInterfaces(domainName) {
+    let cmd = `virsh domiflist ${domainName}`
+    let resStr = this.exec(cmd)
+    return resStr.lines
+      .filter((l) => l !== '')
+      .filter((e, i, a) => i >= 2)
+      .map((line) => line.split(' ').filter((e) => e !== ''))
+      .map((info) => ({name: info[0], type: info[1], source: info[2], model: info[3], mac: info[4]}))
+  }
+
 }
 
 module.exports = {Virsh:Virsh}
