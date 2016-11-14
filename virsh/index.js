@@ -32,6 +32,12 @@ class Virsh {
     return resStr.firstLine
   }
 
+  create(name, ram, vcpu, osVariant, isoSource, network, diskSize, description) {
+    let cmd = `virt-install --hvm --name=${name} --ram=${ram} --vcpus=${vcpu} --os-variant ${osVariant} --location=${isoSource} --network network=${network},model=virtio --disk path=/var/lib/libvirt/images/${name}.img,size=${diskSize},bus=virtio,format=qcow2 --graphics none --extra-args='console=tty0 console=ttyS0,115200n8 serial' --force --cpu host --description "${description}"`
+    let resStr = this.exec(cmd)
+    return resStr.firstLine
+  }
+
 }
 
 module.exports = {Virsh:Virsh}
