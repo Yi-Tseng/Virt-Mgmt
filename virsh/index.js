@@ -49,6 +49,21 @@ class Virsh {
     return result
   }
 
+  getDomainInfo(name) {
+    let cmd = `virsh dominfo ${name}`
+    let resStr = this.exec(cmd)
+    let vminfo = {}
+    let lines = resStr.lines
+                  .map((line) => line.split(':').map((e) => e.trim()))
+    lines.forEach((e) => {
+      if (e.length === 2) {
+        vminfo[e[0]] = e[1]
+      }
+    })
+
+    return vminfo
+  }
+
 }
 
 module.exports = {Virsh:Virsh}
