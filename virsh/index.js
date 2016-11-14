@@ -38,6 +38,17 @@ class Virsh {
     return resStr.firstLine
   }
 
+  listNetworks() {
+    let cmd =`virsh net-list --all`
+    let resStr = this.exec(cmd)
+    let resultLines = resStr.lines
+    let result = resultLines.map((line) => line.split(' '))
+                   .map((tarr) => tarr[1])
+                   .filter((e, i, a) => i >= 2)
+                   .filter((e) => e !== undefined)
+    return result
+  }
+
 }
 
 module.exports = {Virsh:Virsh}
