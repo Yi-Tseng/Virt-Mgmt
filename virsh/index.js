@@ -17,8 +17,8 @@ class Virsh {
   }
 
   listDomains() {
-    let resultString = this.exec('virsh list --all --name')
-    let result = resultString.split('\n').filter(s => s !== '')
+    let resStr = this.exec('virsh list --all --name')
+    let result = resStr.lines.filter(s => s !== '')
     return result
   }
 
