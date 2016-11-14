@@ -12,8 +12,8 @@ class Virsh {
   }
 
   getHostname() {
-    let resultString = this.exec('virsh hostname')
-    return resultString.split('\n')[0]
+    let resStr = this.exec('virsh hostname')
+    return resStr.firstLine
   }
 
   listDomains() {
@@ -23,13 +23,13 @@ class Virsh {
   }
 
   getDomainStatus(domainName) {
-    let resultString = this.exec(`virsh domstate ${domainName}`)
-    return resultString.split('\n')[0]
+    let resStr = this.exec(`virsh domstate ${domainName}`)
+    return resStr.firstLine
   }
 
   cloneDomain(vmName, imgSource, vmMac) {
-    let resultString = this.exec(`virt-clone --original ${imgSource} --name ${vmName} --mac ${vmMac} --file /var/lib/libvirt/images/${vmName}.img`)
-    return resultString.split('\n')[0]
+    let resStr = this.exec(`virt-clone --original ${imgSource} --name ${vmName} --mac ${vmMac} --file /var/lib/libvirt/images/${vmName}.img`)
+    return resStr.firstLine
   }
 
 }
