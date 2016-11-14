@@ -2,6 +2,10 @@ Virt Manager
 ====
 Virsh with web graphic user interface
 
+## Before setup:
+
+Make sure your libvirt/virsh and kvm works correctly.
+
 ## Setup:
 
 ```bash
@@ -12,6 +16,8 @@ Init database
 ```bash
 $ cp virt-mgmt.sample virt-mgmt
 ```
+
+You can modify database by using sqlite3 cli tool
 
 ## Features:
 
@@ -45,6 +51,10 @@ Default username and password is root/toor
   - [ ] Information
   - [ ] Create/delete pool
   - [ ] Create/delete volume
+
+## Screenshots:
+![index](https://raw.githubusercontent.com/TakeshiTseng/Virt-Mgmt/master/screenshots/screenshot1.png)
+![information](https://raw.githubusercontent.com/TakeshiTseng/Virt-Mgmt/master/screenshots/screenshot2.png)
 
 
 ## License:
