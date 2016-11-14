@@ -8,6 +8,11 @@ Virsh with web graphic user interface
 $ npm install
 ```
 
+Init database
+```bash
+$ cp virt-mgmt.sample virt-mgmt
+```
+
 ## Features:
 
 - Manage VMs
