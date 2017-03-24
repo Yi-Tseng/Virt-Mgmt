@@ -22,7 +22,7 @@
       <li>Interfaces:
         <ul>
           <% interfaces.forEach((intf) => { %>
-            <li><%= intf.name %> (<strong>type:</strong> <%= intf.type %>, <strong>source:</strong> <%= intf.source%>, <strong>model:</strong> <%= intf.model%>, <strong>mac:</strong> <%= intf.mac.toUpperCase() %></li>
+            <li><%= intf.name %> (<strong>type:</strong> <%= intf.type %>, <strong>source:</strong> <%= intf.source%>, <strong>model:</strong> <%= intf.model%>, <strong>mac:</strong> <%= intf.mac.toUpperCase() %>, <strong>IP:</strong> <%= intf.ip %></li>
           <% }) %>
         </ul>
       </li>
