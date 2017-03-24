@@ -64,14 +64,34 @@ class Virsh {
     return vminfo
   }
 
+  getIpAddresses() {
+    let cmd = `cat /var/lib/libvirt/dnsmasq/default.leases`
+    let resStr = this.exec(cmd)
+    let ips = resStr.lines
+      .filter((l) => l !== '')
+      .map((l) => l.split(' '))
+      .filter((sp) => sp.length >= 4)
+      .map((sp) => ({"mac": sp[1], "ip": sp[2]}))
+    return ips
+  }
+
   getInterfaces(domainName) {
     let cmd = `virsh domiflist ${domainName}`
     let resStr = this.exec(cmd)
-    return resStr.lines
+    let ips = this.getIpAddresses()
+    var ifaces = resStr.lines
       .filter((l) => l !== '')
       .filter((e, i, a) => i >= 2)
       .map((line) => line.split(' ').filter((e) => e !== ''))
       .map((info) => ({name: info[0], type: info[1], source: info[2], model: info[3], mac: info[4]}))
+
+    ifaces = ifaces
+      .map((info) => {
+        var tmpIps = ips.filter((i) => i.mac === info.mac).map((i) => i.ip)
+        info['ip'] = tmpIps
+        return info
+      })
+    return ifaces
   }
 
   getBlks(domainName) {
